@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Routes, Route } from 'react-router-dom'
+import News from './components.js/news'
+import Fiveday from './components.js/fiveday'
 
 function App() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=879c8b91e4e60d5d9eaf44c9e73b38f5`
-
-//const url = 'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}'
 
   const searchLocation = (event) => {
     if (event.key === 'Enter') {
@@ -56,12 +57,20 @@ function App() {
               {data.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null}
               <p>Wind Speed</p>
             </div>
+
           </div>
         }
 
 
 
       </div>
+
+      <News />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/fiveday" element={<Fiveday />} />
+      </Routes>
     </div>
   );
 }
